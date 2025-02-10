@@ -29,10 +29,6 @@ void editAddress() {
 	printf("Editing an address...\n"); }
 void deleteAddress() { 
 	printf("Deleting an address...\n"); }
-void saveToFile() { 
-	printf("Saving addresses to file...\n"); }
-void loadFromFile() { 
-	printf("Loading addresses from file...\n"); }
 
 int main() {
     wellcome();
@@ -41,7 +37,7 @@ int main() {
 }
 
 void wellcome() {
-    clrscr();
+    system("cls");  // Clear screen for DOSBox
     printf("\n\n\n\n\n\n\n\n\n\n\t\t\t  ********  WELCOME ******* \n");
     printf("\t\t\t------------------------------\n\n");
     printf("\n\t\t   Press Enter to continue to the HOME page...\n");
@@ -49,95 +45,62 @@ void wellcome() {
 }
 
 void home() {
-    struct User user;
-    int choice;
-    clrscr();
+    int choice, i;
+    
     while (1) {
-        printf("\n=================    HOME    ===================\n");
-        printf(" Choose an option as per your choice\n");
-        printf("====================================\n");
+        system("cls");  // Clear screen for better UI in DOSBox
+        printf("\n========= HOME =========\n");
         printf("1. Add New Address\n");
         printf("2. View All Addresses\n");
         printf("3. Search Address\n");
         printf("4. Edit Address\n");
         printf("5. Delete Address\n");
-        printf("6. Save Addresses to File\n");
-        printf("7. Load Addresses from File\n");
-        printf("8. Exit\n");
-        printf("====================================\n");
+        printf("6. View Users\n");
+        printf("7. Exit\n");
+        printf("========================\n");
         printf("Enter your choice: ");
         
         scanf("%d", &choice);
-        
-        if (choice == 8) {
+        fflush(stdin);  // Clear input buffer for safe input handling
+
+        if (choice == 7) {
             printf("Exiting...\n");
-            break; 
+            break;
         }
+
+        system("cls");  // Clear screen after selecting an option
         
         switch (choice) {
             case 1:
-            	clrscr();
                 addAddress();
                 break;
             case 2:
-             	clrscr();           
                 viewAddresses();
                 break;
             case 3:
-               	clrscr();         
                 searchAddress();
                 break;
             case 4:
-              	clrscr();          
                 editAddress();
                 break;
             case 5:
-                clrscr();       
                 deleteAddress();
-                break;
+                break;	
             case 6:
-                clrscr();
-                saveToFile();
-                break;
-            case 7:
-                clrscr();
-                loadFromFile();
+                for (i = 0; i < size; i++) {
+                    viewUser(users[i]);
+                }
                 break;
             default:
                 printf("Invalid choice! Please try again.\n");
         }
-            getch();
+        getch();
     }
-}
-
-void addUser() {   
-
-     struct User newUser;
-    if (size >= 100) {
-        printf("User limit reached!\n");
-        return;
-    }
-
-
-    newUser.id = size + 1;
-
-    printf("Enter name: ");
-    scanf("%s", newUser.name);
-    printf("Enter email: ");
-    scanf("%s", newUser.email);
-    printf("Enter phone number: ");
-    scanf("%s", newUser.phone);
-
-    users[size] = newUser;
-    size++;
-
-    printf("User added successfully!\n");
-    getch();
 }
 
 void viewUser(struct User user) {
     int choice;
-    clrscr();
+    system("cls");
     printf("\nUser Details\n");
     printf("Id: %d\n", user.id);
     printf("Name: %s\n", user.name);
@@ -170,13 +133,19 @@ void viewUser(struct User user) {
 }
 
 void editUser(struct User *user) {
-    clrscr();
+    system("cls");
     printf("Enter new name: ");
-    scanf("%s", user->name);
+    fflush(stdin);
+    gets(user->name);
+
     printf("Enter new email: ");
-    scanf("%s", user->email);
+    fflush(stdin);
+    gets(user->email);
+
     printf("Enter new phone number: ");
-    scanf("%s", user->phone);
+    fflush(stdin);
+    gets(user->phone);
+
     printf("User updated successfully!\n");
     getch(); 
 }
@@ -198,3 +167,4 @@ void deleteUser(int userId) {
     printf("User deleted successfully!\n");
     getch();
 }
+
