@@ -6,6 +6,9 @@ A simple **Address Book Management System** built in "C Language" that allows us
 
 ## Features
 
+<img width="1920" height="1076" alt="Screenshot from 2025-11-12 18-00-57" src="https://github.com/user-attachments/assets/124f4e47-0b5a-4d6c-be7f-a0a534d623c1" />
+
+
 **Add New Contact** – Add name, ID, email, address, and phone number 
 
 
